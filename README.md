@@ -24,6 +24,9 @@ A quick to the dataset distribution as also shown that only approximately 1 out 
 
 This U-Net implementation is somewhat different from the original, in the first place, skip connections between blocks with the same resolution of the downsampler and upsampler do not exist here (although the may be added in future versions of the model).  Secondly, after some experimentation, it was found that replacing a convolutional upsampler with a Nearest Upsampler led to faster computations and lower false positives on the bounding boxes.  Instead of a reLU activation, LeakyReLU was used after convolutions as well as batch normalization (Instance normalization in this case since the batch size was 1). 
 
-The optimization process required a combination of 2 loss functions. 
+The optimization process required a combination of 2 loss functions. Dice Coefficient Loss will try to find how good is the mask predicted, comparing the overlapping areas between the ground truth and the outputted mask. This loss is combined with Binary Cross-Entropy With Logist loss that will compare for each pixel the probability  of being inside the mask, against the ground truth.
+
+
+
 
 
